@@ -15,42 +15,42 @@ void parse(Token *token){
   while(start){
 
     S(start);
-    //start = start->next;
+    if(token->next == NULL)
+      printf("%s\n","--Success--");
   }
 }
 
 void S(Token *token){
   if(token->next == NULL)
-    printf("%s\n","--Accepted--");
+    printf("%s\n","--Error--");
   else
-    T(token);
+    T(token->next);
 }
 
 void T(Token *token){
-  if(token->type == 1)
-      O(consumeDigit(token));
-  else if(token->next == NULL)
-    printf("%s\n","--Accepted--");
-  else
-    printf("%s\n","--Error in Parsing--");
+  if(token->next != NULL){
+    token = consumeDigit(token);
+    O(token);
+  }
+
 }
 
 void O(Token *token){
-  if(token->type == 2)
-    T(consumeOperator(token));
-  else if(token->next == NULL)
-    printf("%s\n","--Error in Parsing--");
+  if(token->next != NULL){
+    token = consumeOperator(token);
+    T(token);
+  }
 }
 
 Token* consumeDigit(Token *token){
-  if(token->type == 1)
+  if(token->type == 2)
     return token->next;
   else
-    printf("%s\n","--Error--");
+    printf("%s Invalid Token %c type %d\n","--Error--",token->value,token->type);
 }
 
 Token* consumeOperator(Token *token){
-  if(token->type == 2)
+  if(token->type == 1)
     return token->next;
   else
     printf("%s\n","--Error--");
