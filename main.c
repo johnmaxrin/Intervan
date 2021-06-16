@@ -6,6 +6,8 @@
 #include "includes/parser.h"
 
 void main(){
+
+  printf("\n%s\n\n","--Welcome to the Alpha Version of Intervan.--");
   char *prgm = (char *)calloc(1,sizeof(char *));
   while(1){
     printf("Intervan >> ");
