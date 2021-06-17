@@ -15,7 +15,7 @@ void parse(Token *token){
 
 
     if(S(start)->next == NULL)
-      printf("%s\n","--Success--");
+      printf("%s\n","--Success in Parsing--");
 
 }
 
@@ -27,7 +27,6 @@ Token* S(Token *token){
 }
 
 Token* T(Token *token){
-  printf("%s Type -> %d Value -> %c\n","--Term--",token->type, token->value);
   if(token->next != NULL){
     token = consumeDigit(token);
     return(O(token));
