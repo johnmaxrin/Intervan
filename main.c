@@ -13,6 +13,7 @@ void main(){
     printf("Intervan >> ");
     scanf("%s",prgm);
     Token *start =  lexer(prgm);
+    printToken(start);
     parse(start);
   }
 }

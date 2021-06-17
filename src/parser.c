@@ -12,33 +12,33 @@
 void parse(Token *token){
 
   Token *start = token;
-  while(start){
 
-    S(start);
-    if(token->next == NULL)
+
+    if(S(start)->next == NULL)
       printf("%s\n","--Success--");
-  }
+
 }
 
-void S(Token *token){
+Token* S(Token *token){
   if(token->next == NULL)
-    printf("%s\n","--Error--");
+    printf("%s\n","--Error in start--");
   else
-    T(token->next);
+    return(T(token->next));
 }
 
-void T(Token *token){
+Token* T(Token *token){
+  printf("%s Type -> %d Value -> %c\n","--Term--",token->type, token->value);
   if(token->next != NULL){
     token = consumeDigit(token);
-    O(token);
+    return(O(token));
   }
-
+  return token;
 }
 
-void O(Token *token){
+Token* O(Token *token){
   if(token->next != NULL){
     token = consumeOperator(token);
-    T(token);
+    return(T(token));
   }
 }
 
